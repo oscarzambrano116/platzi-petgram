@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "react": "16.10.2",
-    "react-dom": "16.10.2"
+    "react-dom": "16.10.2",
+    "styled-components": "4.4.0"
   },
   "standard": {
     "ignore": [
@@ -33,6 +34,8 @@
     ]
   },
   "eslintConfig": {
-    "extends": ["./node_modules/standard/eslintrc.json"]
+    "extends": [
+      "./node_modules/standard/eslintrc.json"
+    ]
   }
 }
