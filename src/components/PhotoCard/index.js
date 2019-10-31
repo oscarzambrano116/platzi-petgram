@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { MdFavoriteBorder } from 'react-icons/md'
 import {
   ImgWrapper,
+  Article,
   Img,
   Button
 } from './styles'
@@ -13,17 +14,45 @@ export const PhotoCard = ({
   likes = 0,
   src = DEFAULT_IMAGE
 }) => {
-  return (
-    <article>
-      <a href={`/detail/${id}`}>
-        <ImgWrapper>
-          <Img src={src} alt='' />
-        </ImgWrapper>
-      </a>
+  const element = useRef(null)
+  const [show, setShow] = useState(false)
 
-      <Button>
-        <MdFavoriteBorder size={32} /> {likes} likes!
-      </Button>
-    </article>
+  useEffect(() => {
+    Promise.resolve(
+      typeof window.IntersectionObserver !== 'undefined'
+        ? window.IntersectionObserver
+        : import('intersection-observer')
+    ).then(() => {
+      const observer = new window.IntersectionObserver((entries) => {
+        const { isIntersecting } = entries[0]
+        console.log(isIntersecting)
+        if (isIntersecting) {
+          setShow(true)
+          observer.disconnect()
+        }
+      })
+      observer.observe(element.current)
+      return () => observer.unobserve()
+    })
+  }, [element])
+
+  return (
+    <Article ref={element}>
+      {
+        show && (
+          <>
+            <a href={`/detail/${id}`}>
+              <ImgWrapper>
+                <Img src={src} alt='' />
+              </ImgWrapper>
+            </a>
+
+            <Button>
+              <MdFavoriteBorder size={32} /> {likes} likes!
+            </Button>
+          </>
+        )
+      }
+    </Article>
   )
 }
