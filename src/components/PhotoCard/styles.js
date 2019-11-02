@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { fadeIn } from '../../styles/animation'
 
 export const ImgWrapper = styled.div`
-  border-radius: 10px;
   display: block;
   height: 0;
   overflow: hidden;
@@ -12,11 +11,12 @@ export const ImgWrapper = styled.div`
 `
 
 export const Article = styled.article`
-  min-height: 320px;
+  min-height: 250px;
 `
 
 export const Img = styled.img`
   ${fadeIn()}
+  border-radius: 10px;
   box-shadow: 0 10px 14px rgb(0, 0, 0, 0.2);
   height: 100%;
   object-fit: cover;
