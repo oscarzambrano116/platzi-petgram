@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { useNearScreen } from '../../hooks/useNearScreen'
 import {
   ImgWrapper,
   Article,
@@ -14,48 +16,11 @@ export const PhotoCard = ({
   likes = 0,
   src = DEFAULT_IMAGE
 }) => {
-  const element = useRef(null)
-  const [show, setShow] = useState(false)
   const key = `like-${id}`
+  const [like, setLike] = useLocalStorage(key, false)
+  const [show, element] = useNearScreen()
 
-  const [liked, setLiked] = useState(() => {
-    try {
-      const like = window.localStorage.getItem(key)
-      return like
-    } catch (e) {
-      return false
-    }
-  })
-
-  const Icon = liked ? MdFavorite : MdFavoriteBorder
-
-  const setLocalStorage = (value) => {
-    try {
-      window.localStorage.setItem(key, value)
-      setLiked(value)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  useEffect(() => {
-    Promise.resolve(
-      typeof window.IntersectionObserver !== 'undefined'
-        ? window.IntersectionObserver
-        : import('intersection-observer')
-    ).then(() => {
-      const observer = new window.IntersectionObserver((entries) => {
-        const { isIntersecting } = entries[0]
-        console.log(isIntersecting)
-        if (isIntersecting) {
-          setShow(true)
-          observer.disconnect()
-        }
-      })
-      observer.observe(element.current)
-      return () => observer.unobserve()
-    })
-  }, [element])
+  const Icon = like ? MdFavorite : MdFavoriteBorder
 
   return (
     <Article ref={element}>
@@ -68,7 +33,7 @@ export const PhotoCard = ({
               </ImgWrapper>
             </a>
 
-            <Button onClick={() => setLocalStorage(!liked)}>
+            <Button onClick={() => setLike(!like)}>
               <Icon size={32} /> {likes} likes!
             </Button>
           </>
