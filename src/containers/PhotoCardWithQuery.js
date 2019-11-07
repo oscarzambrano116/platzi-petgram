@@ -16,14 +16,13 @@ query getSinglePhoto($id:ID!) {
 }
 `
 
-const renderProps = 
+const renderProps =
   ({ loading, error, data }) => {
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error!</p>
     const { photo = {} } = data
     return <PhotoCard {...photo} />
   }
-}
 
 export const PhotoCardWithQuery = ({ id }) => {
   return (
