@@ -1,5 +1,5 @@
 import React from 'react'
-import { Anchor, Image } from './styles'
+import { Link, Image } from './styles'
 
 const DEFAULT_IMAGE = ''
 
@@ -7,12 +7,13 @@ export const Category = ({
   cover = DEFAULT_IMAGE,
   path = '',
   emoji = '🐶',
-  loading = false
+  loading = false,
+  id = ''
 }) => {
   return (
-    <Anchor href={path}>
+    <Link to={`/pet/${id}`}>
       <Image src={cover} alt='' />
       {emoji}
-    </Anchor>
+    </Link>
   )
 }
