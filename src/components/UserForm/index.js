@@ -5,12 +5,15 @@ import {
   Form,
   Title,
   Input,
-  Button
+  Button,
+  Error
 } from './styles'
 
 export const UserForm = ({
   onSubmit = () => null,
-  title = ''
+  title = '',
+  error = '',
+  disabled = false
 }) => {
   const email = useInputValue('')
   const password = useInputValue('')
@@ -25,20 +28,23 @@ export const UserForm = ({
 
   return (
     <FormContainer>
-      <Title>{title}</Title>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} disabled={disabled}>
+        <Title>{title}</Title>
         <Input
           type='email'
           placeholder='email'
+          disabled={disabled}
           {...email}
         />
         <Input
           type='password'
           placeholder='password'
+          disabled={disabled}
           {...password}
         />
-        <Button>{title}</Button>
+        <Button disabled={disabled}>{title}</Button>
       </Form>
+      {error && <Error>{error}</Error>}
     </FormContainer>
   )
 }
