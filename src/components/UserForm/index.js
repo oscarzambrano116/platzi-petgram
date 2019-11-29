@@ -5,9 +5,9 @@ import {
   Form,
   Title,
   Input,
-  Button,
   Error
 } from './styles'
+import { SubmitButton } from '../SubmitButton'
 
 export const UserForm = ({
   onSubmit = () => null,
@@ -42,7 +42,7 @@ export const UserForm = ({
           disabled={disabled}
           {...password}
         />
-        <Button disabled={disabled}>{title}</Button>
+        <SubmitButton disabled={disabled}>{title}</SubmitButton>
       </Form>
       {error && <Error>{error}</Error>}
     </FormContainer>
