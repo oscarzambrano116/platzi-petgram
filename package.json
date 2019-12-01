@@ -10,6 +10,7 @@
     "now-build": "yarn build",
     "build": "webpack",
     "dev": "webpack-dev-server --history-api-fallback",
+    "serve:dev": "webpack --mode 'development'  && npx serve dist -s",
     "lint": "standard"
   },
   "devDependencies": {
