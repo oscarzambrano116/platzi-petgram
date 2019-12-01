@@ -1,9 +1,8 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import { FavsWithQuery } from '../containers/GetFavorites'
 import { Layout } from '../components/Layout'
 
-export const Favs = () => {
+const Favs = () => {
   return (
     <Layout
       title='Your favs'
@@ -13,3 +12,5 @@ export const Favs = () => {
     </Layout>
   )
 }
+
+export default Favs
