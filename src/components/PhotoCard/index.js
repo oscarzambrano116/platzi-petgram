@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from '@reach/router'
 import { useNearScreen } from '../../hooks/useNearScreen'
 import { FavButton } from '../FavButton'
@@ -55,4 +56,20 @@ export const PhotoCard = ({
       }
     </Article>
   )
+}
+
+PhotoCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  liked: PropTypes.bool.isRequired,
+  src: PropTypes.string.isRequired,
+  likes: (props, propName, componentName) => {
+    const propValue = props[propName]
+    if (propValue === undefined) {
+      return new Error(`${propName} value must be defined`)
+    }
+
+    if (propValue < 0) {
+      return new Error(`${propName} value must be greater than 0`)
+    }
+  }
 }
