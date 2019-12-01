@@ -1,11 +1,15 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { FavsWithQuery } from '../containers/GetFavorites'
+import { Layout } from '../components/Layout'
 
 export const Favs = () => {
   return (
-    <>
-      <h1>Favs</h1>
+    <Layout
+      title='Your favs'
+      subtitle='your favorites pet pictures'
+    >
       <FavsWithQuery />
-    </>
+    </Layout>
   )
 }
